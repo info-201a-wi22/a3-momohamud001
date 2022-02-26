@@ -1,0 +1,62 @@
+---
+title: "Assignment 3: Data Visualization (incarceration)"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library("maps")
+library("dplyr")
+library("ggplot2")
+library("leaflet")
+library("tidyverse")
+library("plotly")
+```
+
+## R Markdown
+
+### Introduction:
+This project is centered around the data on incarceration rates in the US. This
+data was a bit larger then expected but after i picked my topic which is the 
+difference between black and white prison population i was able to filter down 
+the data, but i felt that wasn't enough so i took another look at the data again
+and noticed that our own states mass incarceration rates of black people has 
+increased drastically in the last several years. This became the forces of my 
+first chart. I then looked at the relationship between the incarceration rates 
+of black people vs whites in New York between the years 1990 and 2000 when the 
+the infamous stop and frisk policy came full swing. Then to wrap things up i made 
+a map that highlights the county's with the largest black prison population. The
+variables i have choose to work with in my data are the total population, the total
+black population and other simple ones such as year county name and state.
+
+## My Charts:
+
+**Chart1**:
+This graph shows how the incarceration rate of black people has increased in Washington
+state from 1990 to 2018. Can see that the even in our state the issue of mass incarceration
+has effected the rate that black people are put in jail far surpassing the rate in which
+white population in jail is increasing.
+
+```{r chart1, echo=FALSE, warning=FALSE}
+source("../source/analysis.R")
+x
+```
+**Chart2**:
+We now can take a look at how the 2 races compare in a different place such as New York.
+the time period i choose to forces on now is 1990-2000 because this was the time period
+in which the stop and frisk policy in New York was very popular and we can see how that 
+effected the increased of the black population while the white population decreased.
+```{r chart2, echo=FALSE, warning=FALSE}
+y + annotate("text", x = 1992.5, y = 2000000, label = "White population")+
+  annotate("text", x = 1992.5, y = 1300000, label = "Black population")
+```
+
+**Map**:
+This map was made to represent the county in the us that have a larger ratio of black
+inmates compared to the national average. as we take a look at the map we can clearly
+see that the majority southern states have much darker tone to them indicating that 
+each county in that area have more then the average ratio of black people in jail 
+compared to the rest of the country
+```{r map, echo=FALSE, warning=FALSE, message=FALSE}
+z
+```
