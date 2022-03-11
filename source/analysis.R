@@ -13,6 +13,13 @@ incarceration_trends <- read.csv(
   stringsAsFactors = FALSE
 )
 
+#introduction questions answers
+# black_pop_in_1990 <- black_people_jail_population %>% 
+#   slice(which.max(percentage)) %>% 
+#   pull(percentage)
+# print(black_pop_in_1990)
+
+
 # Chart 1
 black_people_jail_population <- incarceration_trends %>%
   filter(state == "WA") %>% 
@@ -24,7 +31,7 @@ black_people_jail_population <- mutate(
   )
 
 
-x <- plot_ly(
+chart1 <- plot_ly(
   data = black_people_jail_population,
   x = ~year,
   y = ~percentage,
@@ -33,7 +40,7 @@ x <- plot_ly(
   layout(title = "The incarceration rate of black people in Washington",
     yaxis = list(title = "percentage of black people in jail"),
     xaxis = list(title ="Years"))
-x
+chart1
 
 
 # Chart 2
@@ -47,7 +54,7 @@ BvW_people_jail_population <- incarceration_trends %>%
             black_pop_15to64)%>%
   drop_na()
 
-y <- ggplot(BvW_people_jail_population) +
+chart2 <- ggplot(BvW_people_jail_population) +
   geom_line(mapping = aes(x=year, y=white_pop_15to64),color = "darkred") +
   geom_line(aes(x=year, y=black_pop_15to64),color="steelblue") +
   labs(
@@ -55,7 +62,7 @@ y <- ggplot(BvW_people_jail_population) +
     x = "Years",
     y = "incarceration rates",
   )
-y + annotate("text", x = 1992.5, y = 2000000, label = "White population")+
+chart2 + annotate("text", x = 1992.5, y = 2000000, label = "White population")+
   annotate("text", x = 1992.5, y = 1300000, label = "Black population")
 
 # # Map
@@ -86,7 +93,7 @@ blank_theme <- theme_bw() +
      panel.border = element_blank()
    )
 
-z <- ggplot(data = join_map) +
+VIZ <- ggplot(data = join_map) +
   geom_polygon(
     mapping = aes(x = long, y = lat, group = group, fill = percentage ),
     color = "white",
@@ -98,4 +105,4 @@ z <- ggplot(data = join_map) +
        title = "Ratio of black people in jail",
        subtitle = "southern states have much higher ratio of black people in jail") +
   blank_theme
-z
+VIZ
